@@ -33,16 +33,16 @@ public class PushPool implements Runnable {
             PushAction action = (PushAction) pushContent.get("action");
             if (action == PushAction.SEND) {
                 PushService jPushService = new JPushService();
-                jPushService.send((String) pushContent.get("content"), (cn.jpush.api.push.model.Platform) pushContent.get("platform"), (Map) pushContent.get("extra"), (String) pushContent.get("scheduleFlag"));
+                jPushService.send((String) pushContent.get("content"), (cn.jpush.api.push.model.Platform) pushContent.get("platform"), (Map) pushContent.get("extra"), (String) pushContent.get("scheduleTag"));
             } else if (action == PushAction.SEND_WITH_TAG) {
                 PushService jPushService = new JPushService();
-                jPushService.sendWithTag((String) pushContent.get("content"), (cn.jpush.api.push.model.Platform) pushContent.get("platform"), (List) pushContent.get("tags"), (Map) pushContent.get("extra"), (String) pushContent.get("scheduleFlag"));
+                jPushService.sendWithTag((String) pushContent.get("content"), (cn.jpush.api.push.model.Platform) pushContent.get("platform"), (List)pushContent.get("tags"),(Map) pushContent.get("extra"), (String) pushContent.get("scheduleTag"));
             } else if (action == PushAction.ADD_TAG) {
                 JPushDeviceService jPushService = new JPushDeviceService();
                 jPushService.setTags((String) pushContent.get("registerId"), (List<String>) pushContent.get("tags"));
             } else if (action == PushAction.REMOVE_TAG) {
                 DeviceService deviceService = new JPushDeviceService();
-                deviceService.removeTags((List) pushContent.get("tags"));
+                deviceService.removeTags((List<String>) pushContent.get("tags"));
             }
 
         } catch (APIConnectionException e) {

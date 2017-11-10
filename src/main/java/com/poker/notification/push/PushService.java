@@ -13,8 +13,8 @@ import java.util.Map;
  * @create 2017-11-08
  **/
 public interface PushService {
-    void sendWithTag(String content, Platform platform, List<String> tags, Map extras, String scheduleFlag) throws APIConnectionException, APIRequestException;
-    void send(String content, Platform platform, Map extras, String scheduleFlag) throws APIConnectionException, APIRequestException;
+    void sendWithTag(String content, Platform platform, List<String> tags, Map extras, String scheduleTag) throws APIConnectionException, APIRequestException;
+    void send(String content, Platform platform, Map extras, String scheduleTag) throws APIConnectionException, APIRequestException;
     void cancleSchedule(String name) throws APIConnectionException, APIRequestException;
     void updateSchedule(String name, String time);
 }

@@ -28,7 +28,7 @@ public class PropertieUtil {
         private static String confPath = "gameFiles";
 
         public Propertie(String fileName) {
-            Properties _properties = new Properties();
+            properties = new Properties();
             FileInputStream inputStream = null;
             try {
                 inputStream = new FileInputStream(confPath + "/conf/" + fileName + ".properties");
@@ -37,7 +37,6 @@ public class PropertieUtil {
             } catch (Exception e) {
                 logger.error(fileName + " config file not found.");
             }
-            properties = _properties;
         }
 
         public String getProperty(String property) {

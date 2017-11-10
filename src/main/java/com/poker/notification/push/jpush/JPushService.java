@@ -24,7 +24,7 @@ import java.util.Map;
 public class JPushService implements PushService {
 
     @Override
-    public void sendWithTag(String content, Platform platform, List<String> tags, Map extras, String scheduleFlag) throws APIConnectionException, APIRequestException {
+    public void sendWithTag(String content, Platform platform, List<String> tags, Map extras, String scheduleTag) throws APIConnectionException, APIRequestException {
         PushPayload payload = null;
         if (extras != null) {
             payload = PushPayload.newBuilder()
@@ -46,17 +46,17 @@ public class JPushService implements PushService {
                     .setNotification(Notification.newBuilder()
                             .setAlert(content)
                             .addPlatformNotification(AndroidNotification.newBuilder()
-                                    .addExtras(extras).build())
+                                    .build())
                             .addPlatformNotification(IosNotification.newBuilder()
                                     .incrBadge(1)
-                                    .addExtras(extras).build())
+                                    .build())
                             .build())
                     .build();
         }
 
-        if (scheduleFlag != null && !"".equals(scheduleFlag)) {
-            String scheduleName = scheduleFlag;
-            String[] str = scheduleFlag.split("\\_");
+        if (scheduleTag != null && !"".equals(scheduleTag)) {
+            String scheduleName = scheduleTag;
+            String[] str = scheduleTag.split("\\_");
             Long scheduleTime = Long.parseLong(str[1]);
             Date date = new Date(scheduleTime * 1000);
             SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -67,7 +67,7 @@ public class JPushService implements PushService {
     }
 
     @Override
-    public void send(String content, Platform platform, Map extras, String scheduleFlag) throws APIConnectionException, APIRequestException {
+    public void send(String content, Platform platform, Map extras, String scheduleTag) throws APIConnectionException, APIRequestException {
         PushPayload payload = null;
         if (extras != null) {
             payload = PushPayload.newBuilder()
@@ -97,9 +97,9 @@ public class JPushService implements PushService {
                     .build();
         }
 
-        if (scheduleFlag != null && !"".equals(scheduleFlag)) {
-            String scheduleName = scheduleFlag;
-            String[] str = scheduleFlag.split("\\_");
+        if (scheduleTag != null && !"".equals(scheduleTag)) {
+            String scheduleName = scheduleTag;
+            String[] str = scheduleTag.split("\\_");
             Long scheduleTime = Long.parseLong(str[1]);
             Date date = new Date(scheduleTime * 1000);
             SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
